@@ -24,14 +24,39 @@ def select_character():
             pass
         print("Invalid selection. Please enter a valid number.\n")
 
+def select_message_type():
+    print("\nSelect the type of message to send:")
+    print("  [1] Single Message")
+    print("  [2] Image with Text")
+    while True:
+        try:
+            choice = int(input("Enter the number of your choice: "))
+            if choice in [1, 2]:
+                return choice
+        except ValueError:
+            pass
+        print("Invalid selection. Please enter 1 or 2.\n")
+
 character = select_character()
+message_type = select_message_type()
+
 print("\nType your message below. Press Enter to send.")
 print("-" * 40)
-message = input(f"> {character.value}: ")
-print("-" * 40)
 
-webhook = DiscordWebhook(webhook_url=WEBHOOK_URL)
-customizeWebhook(webhook, character)
-webhook.send(message)
-print(f"\nMessage sent as {character.value}!\n")
+if message_type == 1:
+    message = input(f"> {character.value}: ")
+    print("-" * 40)
+    webhook = DiscordWebhook(webhook_url=WEBHOOK_URL)
+    customizeWebhook(webhook, character)
+    webhook.send(message)
+    print(f"\nMessage sent as {character.value}!\n")
+elif message_type == 2:
+    image_url = input("Enter the image URL: ")
+    message = input(f"> {character.value} (text to send with image): ")
+    print("-" * 40)
+    webhook = DiscordWebhook(webhook_url=WEBHOOK_URL)
+    customizeWebhook(webhook, character)
+    webhook.send(message)
+    webhook.send(image_url)
+    print(f"\nText and image sent as {character.value}!\n")
 
