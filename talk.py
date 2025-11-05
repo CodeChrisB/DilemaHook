@@ -4,10 +4,33 @@ from ChracterCustomizer import customizeWebhook
 import os
 import time
 
+# Clear screen
 os.system('cls')
-with open(".env", "r", encoding="utf-8") as f:
-    WEBHOOK_URL = f.read().strip()
 
+# Read CSV-style .env
+entries = []
+with open(".env", "r", encoding="utf-8") as f:
+    lines = f.readlines()
+    for line in lines:
+        line = line.strip()
+        if not line or ";" not in line:
+            continue
+        name, url = line.split(";", 1)
+        entries.append((name.strip(), url.strip()))
+
+# Show choices to user
+for i, (name, _) in enumerate(entries, 1):
+    print(f"[{i}] {name}")
+
+# Ask for selection
+choice = 0
+while choice < 1 or choice > len(entries):
+    try:
+        choice = int(input("Select an entry: "))
+    except ValueError:
+        pass
+
+WEBHOOK_URL = entries[choice-1][1]
 def select_character():
     print("=" * 40)
     print("   MilemaBot - Character Talk Utility")
