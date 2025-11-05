@@ -5,6 +5,7 @@ import os
 class Character(Enum):
     Breadbot = "Breadbot"
     Morgana = "Morgana"
+    DrChair = "Dr. Chair"
     # Add more characters as needed
 
 class Quotes:

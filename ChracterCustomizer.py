@@ -10,6 +10,10 @@ CHARACTER_AVATARS = {
         "username": "Morgana",
         "avatar_url": "https://media.discordapp.net/attachments/1331163030364360828/1433182714252759173/Morgana.png?ex=6903c2ea&is=6902716a&hm=8c333ba6fb9fb726aded3aa277ca7016e0d4445a5ed0963b945681bbebaf36da&=&format=webp&quality=lossless"
     },
+    Character.DrChair: {
+        "username": "Dr. Chair",
+        "avatar_url": "https://media.discordapp.net/attachments/1331163030364360828/1435602348620644413/image.png?ex=690c9060&is=690b3ee0&hm=242c37a44701ae28734e2dff5c3a1b6b3944b30a2d811793ba60bddf1d7bc39d&=&format=webp&quality=lossless"
+    },
     # Add more characters as needed
 }
 
