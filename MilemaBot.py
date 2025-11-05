@@ -6,11 +6,6 @@ import sys
 import os
 
 
-# 80% chance to exit
-if random.random() < 0.8:
-    sys.exit()  # Closes the program
-
-
 # Discord webhook URL 
 os.system('cls')
 with open(".env", "r", encoding="utf-8") as f:

@@ -8,7 +8,7 @@ CHARACTER_AVATARS = {
     },
     Character.Morgana: {
         "username": "Morgana",
-        "avatar_url": "https://example.com/morgana_avatar.png"
+        "avatar_url": "https://media.discordapp.net/attachments/1331163030364360828/1433182714252759173/Morgana.png?ex=6903c2ea&is=6902716a&hm=8c333ba6fb9fb726aded3aa277ca7016e0d4445a5ed0963b945681bbebaf36da&=&format=webp&quality=lossless"
     },
     # Add more characters as needed
 }
