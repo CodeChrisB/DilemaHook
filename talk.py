@@ -4,33 +4,36 @@ from ChracterCustomizer import customizeWebhook
 import os
 import time
 
+WEBHOOK_URL = ""
+
 # Clear screen
 os.system('cls')
 
-# Read CSV-style .env
-entries = []
-with open(".env", "r", encoding="utf-8") as f:
-    lines = f.readlines()
-    for line in lines:
-        line = line.strip()
-        if not line or ";" not in line:
-            continue
-        name, url = line.split(";", 1)
-        entries.append((name.strip(), url.strip()))
+def set_webhook_url():
+    # Read CSV-style .env
+    entries = []
+    with open(".env", "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or ";" not in line:
+                continue
+            name, url = line.split(";", 1)
+            entries.append((name.strip(), url.strip()))
 
-# Show choices to user
-for i, (name, _) in enumerate(entries, 1):
-    print(f"[{i}] {name}")
+    # Show choices
+    print("\nSelect a channel/webhook:")
+    for i, (name, _) in enumerate(entries, 1):
+        print(f"[{i}] {name}")
 
-# Ask for selection
-choice = 0
-while choice < 1 or choice > len(entries):
-    try:
-        choice = int(input("Select an entry: "))
-    except ValueError:
-        pass
+    choice = 0
+    while choice < 1 or choice > len(entries):
+        try:
+            choice = int(input("Enter the number of your channel: "))
+        except ValueError:
+            pass
 
-WEBHOOK_URL = entries[choice-1][1]
+    return entries[choice - 1][1]
+
 def select_character():
     print("=" * 40)
     print("   MilemaBot - Character Talk Utility")
@@ -62,14 +65,15 @@ def select_message_type():
             pass
         print("Invalid selection. Please enter 1, 2, or 3.\n")
 
+# --- Ask user inputs ---
 character = select_character()
 message_type = select_message_type()
+WEBHOOK_URL = set_webhook_url()
 
 print("-" * 40)
 
 # --- Single Message ---
 if message_type == 1:
-    print("\nType your message below. Press Enter to send.")
     message = input(f"> {character.value}: ")
     webhook = DiscordWebhook(webhook_url=WEBHOOK_URL)
     customizeWebhook(webhook, character)
@@ -82,19 +86,19 @@ elif message_type == 2:
     lines = []
     while True:
         line = input(f"> {character.value}: ")
-        if line.strip() == "":
+        if not line.strip():
             break
         lines.append(line)
 
-    if not lines:
-        print("No messages entered.\n")
-    else:
+    if lines:
         webhook = DiscordWebhook(webhook_url=WEBHOOK_URL)
         customizeWebhook(webhook, character)
         for line in lines:
             webhook.send(line)
-            time.sleep(0.5)  # small delay between messages
+            time.sleep(0.5)
         print(f"\n{len(lines)} messages sent as {character.value}!\n")
+    else:
+        print("No messages entered.\n")
 
 # --- Image with Text ---
 elif message_type == 3:
