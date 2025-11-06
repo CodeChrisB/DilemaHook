@@ -8,7 +8,7 @@ CHARACTER_AVATARS = {
     },
     Character.Morgana: {
         "username": "Morgana",
-        "avatar_url": "https://media.discordapp.net/attachments/1331163030364360828/1433182714252759173/Morgana.png?ex=6903c2ea&is=6902716a&hm=8c333ba6fb9fb726aded3aa277ca7016e0d4445a5ed0963b945681bbebaf36da&=&format=webp&quality=lossless"
+        "avatar_url": "https://media.discordapp.net/attachments/1402704030362370100/1436046172279013549/morgana.png?ex=690e2db7&is=690cdc37&hm=a8b60745a9556733903fbe7e9ca643b4e1c7a6dbca8e60a3c0ad2b872ca76425&=&format=webp&quality=lossless"
     },
     Character.DrChair: {
         "username": "Dr. Chair",
