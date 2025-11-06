@@ -6,6 +6,7 @@ class Character(Enum):
     Breadbot = "Breadbot"
     Morgana = "Morgana"
     DrChair = "Dr. Chair"
+    Zara = "Zara"
     # Add more characters as needed
 
 class Quotes:

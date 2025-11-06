@@ -1,4 +1,5 @@
 import requests
+import json
 from typing import List, Dict, Any
 
 class DiscordWebhook:
@@ -45,11 +46,20 @@ class DiscordWebhook:
         if components:
             payload["components"] = components
 
+        # --- handle file uploads ---
         if files:
-            multipart_files = [("file", open(f, "rb")) for f in files]
-            response = requests.post(self.webhook_url, data={"payload_json": str(payload)}, files=multipart_files)
-            for _, f in multipart_files:
-                f.close()
+            multipart_files = []
+            try:
+                for path in files:
+                    multipart_files.append(("file", (path.split("/")[-1], open(path, "rb"))))
+                response = requests.post(
+                    self.webhook_url,
+                    data={"payload_json": json.dumps(payload)},
+                    files=multipart_files
+                )
+            finally:
+                for _, f in multipart_files:
+                    f[1].close()
         else:
             response = requests.post(self.webhook_url, json=payload)
         return response
@@ -62,7 +72,6 @@ class DiscordWebhook:
             self.embed: Dict[str, Any] = {}
             self._buttons: List[Dict[str, Any]] = []
 
-        # Fluent embed setters
         def setTitle(self, title: str):
             self.embed["title"] = title
             return self
@@ -105,25 +114,20 @@ class DiscordWebhook:
             self.embed["fields"].append({"name": name, "value": value, "inline": inline})
             return self
 
-        # --------------------------
-        # Button support
-        # --------------------------
         def addButton(self, label: str, url: str):
             if len(self._buttons) >= 5:
-                raise ValueError("A single ActionRow can have max 5 buttons. You can add multiple rows manually if needed.")
+                raise ValueError("A single ActionRow can have max 5 buttons.")
             self._buttons.append({
-                "type": 2,   # Button
-                "style": 5,  # Link button
+                "type": 2,
+                "style": 5,
                 "label": label,
                 "url": url
             })
             return self
 
-        # Build embed dict
         def build(self) -> Dict[str, Any]:
             return self.embed
 
-        # Build components array (top-level for webhook)
         def buildComponents(self) -> List[Dict[str, Any]]:
             if not self._buttons:
                 return None
