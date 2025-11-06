@@ -12,7 +12,7 @@ CHARACTER_AVATARS = {
     },
     Character.DrChair: {
         "username": "Dr. Chair",
-        "avatar_url": "https://media.discordapp.net/attachments/1331163030364360828/1435602348620644413/image.png?ex=690c9060&is=690b3ee0&hm=242c37a44701ae28734e2dff5c3a1b6b3944b30a2d811793ba60bddf1d7bc39d&=&format=webp&quality=lossless"
+        "avatar_url": "https://media.discordapp.net/attachments/1331163030364360828/1436049031477465210/image.png?ex=690e3061&is=690cdee1&hm=c5a99b42273fc4846378e31cdc46a8b0a1f80dd50bbae534a14dc7e3e837c664&=&format=webp&quality=lossless"
     },
     Character.Zara:{
         "username": "Zara",
