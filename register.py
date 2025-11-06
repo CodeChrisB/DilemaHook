@@ -7,6 +7,7 @@ class Character(Enum):
     Morgana = "Morgana"
     DrChair = "Dr. Chair"
     Zara = "Zara"
+    Nyra = "Nyra"
     # Add more characters as needed
 
 class Quotes:
